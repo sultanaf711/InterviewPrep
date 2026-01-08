@@ -1,0 +1,978 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>GSK IJP – Interview Flip Cards (Final)</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+:root {
+  --bg: #020617;
+  --card-bg: rgba(255,255,255,0.08);
+  --card-border: rgba(255,255,255,0.15);
+  --primary: #38bdf8;
+  --intent: #fbbf24;
+  --validate: #34d399;
+  --text-main: #e5e7eb;
+  --text-muted: #9ca3af;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  padding: 32px;
+  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto;
+  background: radial-gradient(circle at top, #1e293b, #020617);
+  color: var(--text-main);
+}
+
+h1 { font-size: 28px; margin-bottom: 6px; }
+.subtitle { color: var(--text-muted); margin-bottom: 32px; }
+
+h2 {
+  margin: 40px 0 16px;
+  font-size: 20px;
+  border-left: 4px solid var(--primary);
+  padding-left: 12px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  gap: 28px;
+}
+
+.card { perspective: 1400px; }
+
+.inner {
+  position: relative;
+  height: 380px;
+  transition: transform 0.85s cubic-bezier(.4,.2,.2,1);
+  transform-style: preserve-3d;
+  cursor: pointer;
+}
+
+.card.flipped .inner { transform: rotateY(180deg); }
+
+.face {
+  position: absolute;
+  inset: 0;
+  border-radius: 18px;
+  padding: 24px;
+  backdrop-filter: blur(16px);
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  box-shadow: 0 14px 36px rgba(0,0,0,0.45);
+  backface-visibility: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.back { transform: rotateY(180deg); }
+
+.tag {
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--primary);
+  margin-bottom: 10px;
+}
+
+.intent {
+  font-size: 13px;
+  color: var(--intent);
+  margin-top: 12px;
+  line-height: 1.45;
+}
+
+.answer {
+  font-size: 15px;
+  line-height: 1.6;
+  color: #f9fafb;
+}
+
+.validate {
+  margin-top: 14px;
+  font-size: 13px;
+  line-height: 1.45;
+  color: var(--validate);
+  border-top: 1px dashed rgba(255,255,255,0.25);
+  padding-top: 10px;
+}
+
+.scrollable {
+  overflow-y: auto;
+  padding-right: 6px;
+}
+
+.scrollable::-webkit-scrollbar { width: 6px; }
+.scrollable::-webkit-scrollbar-thumb {
+  background-color: rgba(255,255,255,0.25);
+  border-radius: 6px;
+}
+
+/* ================= MOBILE FIX ================= */
+@media (max-width: 768px) {
+  body { padding: 12px; }
+  h1 { font-size: 22px; }
+  h2 { font-size: 17px; margin: 28px 0 12px; padding-left: 8px; }
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+  .inner {
+    height: auto;
+    min-height: 260px;
+    transition: none;
+  }
+  .face {
+    position: relative;
+    border-radius: 12px;
+    padding: 16px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.25);
+    font-size: 14px;
+  }
+  .face.back { display: none; }
+  .card.flipped .face.front { display: none; }
+  .card.flipped .face.back { display: flex; }
+}
+
+/* Make cards easier to tap on mobile */
+@media (max-width: 480px) {
+  .face { padding: 10px; font-size: 13px; }
+  .tag { font-size: 10px; }
+  .answer { font-size: 13px; }
+  .intent, .validate { font-size: 12px; }
+}
+
+footer {
+  margin-top: 60px;
+  text-align: center;
+  font-size: 12px;
+  color: var(--text-muted);
+}
+</style>
+
+</head>
+
+<body>
+<h1>Flip Cards</h1>
+<p class="subtitle">
+Question → Intent → Answer → Intent Reinforced → Validation
+</p>
+
+<!-- ================= ELEVATOR PITCH ================= -->
+<h2>Elevator Pitch</h2>
+
+<div class="grid">
+<div class="card" onclick="this.classList.toggle('flipped')">
+<div class="inner">
+
+<div class="face front">
+  <div class="tag">INTRO</div>
+  <div class="answer">60–90 second elevator pitch</div>
+  <div class="intent">
+    What they want to know: Is your experience real, progressive, and aligned to this role?
+  </div>
+</div>
+
+<div class="face back">
+  <div class="answer">
+    I currently work as a Portfolio Release Train Engineer and Tech Program Management Manager
+    at GSK, supporting the R&D Tech portfolio. My role focuses on portfolio-level execution,
+    release governance, and improving delivery predictability across multiple Agile Release
+    Trains in a regulated pharma environment.<br><br>
+
+    Earlier in my career at Infosys and EdgeVerve, I worked extensively on execution, delivery,
+    and support and maintenance of large-scale financial banking platforms for clients like
+    HPB, ANZ, and ICICI. I started in core development and production support, and gradually
+    transitioned into delivery and support leadership roles, working closely with senior
+    leadership, product directors, and engineering teams for ARB/BRB and CAB-driven change
+    decisions.<br><br>
+
+    That journey from hands-on execution to portfolio-level delivery has shaped how I work
+    today. Alongside delivery, I place strong emphasis on release readiness, stability signals
+    from defect and incident trends, and ensuring operational learnings are reflected in
+    planning and prioritization.<br><br>
+
+    Today, my accountability is largely through delivery and release governance. This role
+    allows me to focus more directly and formally on service reliability, support maturity,
+    and product lifecycle stability—areas I already work closely with and now want to deepen.
+  </div>
+
+  <div class="intent">
+    Intent reinforced: Show credibility, leadership progression, and readiness for service ownership.
+  </div>
+
+  <div class="validate">
+    Validates: seniority, regulated experience, internal mobility readiness
+  </div>
+</div>
+
+</div>
+</div>
+</div>
+
+<!-- ================= JOB DESCRIPTION – ORIGINAL WORDING ================= -->
+<h2>📘 Job Description (Original Wording)</h2>
+
+<div class="grid">
+
+  <!-- COMPANY CONTEXT -->
+  <div class="card" onclick="this.classList.toggle('flipped')">
+    <div class="inner">
+      <div class="face front">
+        <div class="tag">COMPANY CONTEXT</div>
+        <div class="answer scrollable">GSK Vision & Strategy</div>
+      </div>
+      <div class="face back">
+        <div class="answer scrollable">
+GSK remains committed to achieving bold commercial ambitions for the future. By 2031, we aim to deliver £40 billion in annual sales, leveraging our strong performance momentum to increase our positive impact on the health of billions of patients globally. Our Ahead Together strategy is centered on early intervention to prevent and alter the course of disease, protecting people and supporting healthcare systems. Our diverse portfolio includes vaccines, specialty medicines and general medicines. Through continuous innovation and a dedicated focus on scientific and technical excellence, we strive to develop and launch groundbreaking treatments that address critical health challenges.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- POSITION SUMMARY -->
+  <div class="card" onclick="this.classList.toggle('flipped')">
+    <div class="inner">
+      <div class="face front">
+        <div class="tag">POSITION SUMMARY</div>
+        <div class="answer scrollable">Role Overview</div>
+      </div>
+      <div class="face back">
+        <div class="answer scrollable">
+As the Associate Director – Product management - Outsourced Applications, you will own day to day support activities that keep our IT products dependable and our users productive across GSK’s pharma operations. You will collaborate closely with product owners, engineers, strategic partners, validation/QA and business stakeholders to resolve incidents, streamline processes, and implement optimizations. You will support delivery of product roadmaps, simplify the IT landscape through planned decommissions, and protect business continuity by maintaining robust application recovery and disaster recovery strategies. You will capture and share learnings to prevent recurrence. We seek clear communicators who coach others, bring curiosity, and drive practical, maintain audit readiness. This role offers strong growth, visible impact and the opportunity to combine science, technology and talent to help get ahead of disease.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- KEY RESPONSIBILITIES -->
+  <div class="card" onclick="this.classList.toggle('flipped')">
+    <div class="inner">
+      <div class="face front">
+        <div class="tag">KEY RESPONSIBILITIES</div>
+        <div class="answer">Responsibilities List</div>
+      </div>
+      <div class="face back">
+        <div class="answer scrollable">
+• Own service design, service transition, vendor management and the product lifecycle, providing clear timelines, regular status updates and proactive stakeholder communication.<br><br>
+• Coordinate cross functional incident response (engineering, ITSM, service desk, QA, infrastructure, cyber security and vendors) and lead resolution or safe workaround implementation.<br><br>
+• Maintain and improve support runbooks, knowledge articles, escalation paths and on call rotas to ensure consistent, auditable service.<br><br>
+• Operate and mature ITSM processes (incident, problem, change, release, request, configuration management) for the product; ensure SLAs/OLAs are met and CMDB/CIs are accurate.<br><br>
+• Monitor support metrics and KPIs (MTTR, incident volumes by severity, repeat incidents, SLA attainment, CSAT); identify trends and present clear, actionable insights to product and business stakeholders.<br><br>
+• Lead post incident reviews (root cause analysis) and drive durable process or product changes to prevent recurrence; ensure follow up actions are tracked and closed.<br><br>
+• Support product lifecycle activities including release coordination, GxP validation artefacts review, DevSecOps, monitoring, go live readiness and decommissioning support as required.<br><br>
+• Collaborate with Product Owners on backlog prioritization driven by operational risk, user impact and regulatory requirements.<br><br>
+• Coach and mentor junior support staff; act as escalation point for complex or high impact issues and guide effective stakeholder communications.<br><br>
+• Manage relationships with third party vendors for support escalations, contract fulfilment and performance management.<br><br>
+• Contribute to continuous improvement initiatives across support, deployment and product stability practices.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MANDATORY EXPERIENCE -->
+  <div class="card" onclick="this.classList.toggle('flipped')">
+    <div class="inner">
+      <div class="face front">
+        <div class="tag">MANDATORY EXPERIENCE</div>
+        <div class="answer">Pharma IT</div>
+      </div>
+      <div class="face back">
+        <div class="answer scrollable">
+• Minimum 6 years’ experience in product, technical or application support within pharma or regulated healthcare environments; demonstrated understanding of pharmaceutical business processes (R&D Scientific, Clinical, Safety and Regulatory) is required.<br><br>
+• Strong ITSM experience: practical use and process ownership of incident, problem, change, release, request and configuration management in regulated environments. Hands on experience with ServiceNow, or equivalent ticketing/ITSM platforms is mandatory.<br><br>
+• Product lifecycle management exposure: involvement in release management, validation/CSV activities (IQ/OQ/PQ), go live readiness, and decommissioning of regulated IT systems.<br><br>
+• Vendor Governance: Manage relationships with external vendors/partners to ensure service delivery, continuous improvements, compliance, performance, and risk mitigation.<br><br>
+• DevSecOps: Implement secure coding practices, CI/CD pipelines, and vulnerability management to reduce risks.<br><br>
+• Budget Planning and driving cost efficiency: Manage budgets, track spending and identify cost-saving opportunities.<br><br>
+• Product management collaboration: proven ability to work closely with product managers on prioritization, operational requirements and lifecycle decisions.<br><br>
+• Regulatory & quality awareness: working knowledge of GxP requirements like 21 CFR Part 11, data integrity principles and experience interfacing with QA.<br><br>
+• Cloud/SaaS and integrations, Monitoring & observability, Incident response & RCA, Communication & stakeholder management, familiarity with ServiceNow, Power BI, Aha, JIRA, ADO, AIOps and SAFe.
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+<!-- ================= ALL QUESTIONS ================= -->
+<h2>Interview Questions (Standard → Grilling)</h2>
+
+<div class="grid">
+
+<!-- WHY ROLE -->
+<div class="card" onclick="this.classList.toggle('flipped')">
+<div class="inner">
+<div class="face front">
+  <div class="tag">WHY</div>
+  <div class="answer">Why are you interested in this role?</div>
+  <div class="intent">Are you moving toward ownership or away from delivery pressure?</div>
+</div>
+<div class="face back">
+  <div class="answer">
+    It formalizes service reliability, support maturity, and lifecycle stability
+    responsibilities I already work closely with today.
+  </div>
+  <div class="intent">
+    Intent reinforced: Motivation is ownership-driven, not role escape.
+  </div>
+  <div class="validate">
+    Validates: intent, fit, maturity
+  </div>
+</div>
+</div>
+</div>
+
+<!-- DELIVERY VS SUPPORT -->
+<div class="card" onclick="this.classList.toggle('flipped')">
+<div class="inner">
+<div class="face front">
+  <div class="tag">DELIVERY vs SUPPORT</div>
+  <div class="answer">Why trust you with service ownership?</div>
+  <div class="intent">Will you protect stability under delivery pressure?</div>
+</div>
+<div class="face back">
+  <div class="answer">
+    Delivery decisions that ignore defect and incident learnings eventually create instability.
+    My experience integrates operational insights directly into execution decisions.
+  </div>
+  <div class="intent">
+    Intent reinforced: Long-term thinking over short-term delivery optics.
+  </div>
+  <div class="validate">
+    Validates: judgment, ownership mindset
+  </div>
+</div>
+</div>
+</div>
+
+<!-- INCIDENTS -->
+<div class="card" onclick="this.classList.toggle('flipped')">
+<div class="inner">
+<div class="face front">
+  <div class="tag">INCIDENTS</div>
+  <div class="answer">Tell us about your incident experience</div>
+  <div class="intent">Can you stay calm and structured when things break?</div>
+</div>
+<div class="face back">
+  <div class="answer">
+    I’ve coordinated high-impact incidents with a focus on rapid stabilization,
+    followed by RCA and prevention using defect and incident trends.
+  </div>
+  <div class="intent">
+    Intent reinforced: Composure, structure, prevention mindset.
+  </div>
+  <div class="validate">
+    Validates: operational leadership
+  </div>
+</div>
+</div>
+</div>
+
+<!-- ITSM -->
+<div class="card" onclick="this.classList.toggle('flipped')">
+<div class="inner">
+<div class="face front">
+  <div class="tag">ITSM</div>
+  <div class="answer">Do you own ITSM processes?</div>
+  <div class="intent">Are you exaggerating your ITSM exposure?</div>
+</div>
+<div class="face back">
+  <div class="answer">
+    ITSM teams own the processes and tools. My role is ensuring alignment,
+    readiness, and disciplined follow-through.
+  </div>
+  <div class="intent">
+    Intent reinforced: Honest collaboration, not overclaiming.
+  </div>
+  <div class="validate">
+    Validates: trust, governance awareness
+  </div>
+</div>
+</div>
+</div>
+
+<!-- STAKEHOLDERS -->
+<div class="card" onclick="this.classList.toggle('flipped')">
+<div class="inner">
+<div class="face front">
+  <div class="tag">STAKEHOLDERS</div>
+  <div class="answer">How do you handle senior leaders during incidents?</div>
+  <div class="intent">Will leaders trust you under pressure?</div>
+</div>
+<div class="face back">
+  <div class="answer">
+    By providing calm, factual updates—what we know, what’s being done,
+    and when the next update will come.
+  </div>
+  <div class="intent">
+    Intent reinforced: Clarity over reassurance.
+  </div>
+  <div class="validate">
+    Validates: executive presence
+  </div>
+</div>
+</div>
+</div>
+
+<!-- GAPS -->
+<div class="card" onclick="this.classList.toggle('flipped')">
+<div class="inner">
+<div class="face front">
+  <div class="tag">SELF-AWARENESS</div>
+  <div class="answer">What will you need to ramp up?</div>
+  <div class="intent">Are you self-aware without being insecure?</div>
+</div>
+<div class="face back">
+  <div class="answer">
+    Deepening hands-on familiarity with ServiceNow workflows in a pharma-validated
+    context, while leveraging my existing governance and support experience.
+  </div>
+  <div class="intent">
+    Intent reinforced: Growth mindset without competence doubt.
+  </div>
+  <div class="validate">
+    Validates: honesty, learning agility
+  </div>
+</div>
+</div>
+</div>
+
+</div>
+
+
+<!-- ================= ACRONYMS & ABBREVIATIONS ================= -->
+<h2>Acronyms & Abbreviations (Support, ITSM, Vendor Management)</h2>
+<div class="grid">
+  <div class="card" onclick="this.classList.toggle('flipped')">
+    <div class="inner">
+      <div class="face front">
+        <div class="tag">MTTR</div>
+        <div class="answer">Mean Time To Repair/Resolve</div>
+        <div class="intent">How quickly incidents are resolved; lower MTTR = faster recovery.</div>
+      </div>
+      <div class="face back">
+        <div class="answer">
+          Average time to restore service after an incident.<br>
+          <b>Formula:</b> Total downtime ÷ number of incidents.
+        </div>
+        <div class="validate">Key KPI for support and QBRs.</div>
+      </div>
+    </div>
+  </div>
+  <div class="card" onclick="this.classList.toggle('flipped')">
+    <div class="inner">
+      <div class="face front">
+        <div class="tag">MI</div>
+        <div class="answer">Major Incident</div>
+        <div class="intent">High-impact incident needing urgent, cross-team response.</div>
+      </div>
+      <div class="face back">
+        <div class="answer">
+          Triggers special escalation, war-room, and post-incident review processes.<br>
+          Often called "P1" or "Sev-1".
+        </div>
+        <div class="validate">Requires structured comms and RCA.</div>
+      </div>
+    </div>
+  </div>
+  <div class="card" onclick="this.classList.toggle('flipped')">
+    <div class="inner">
+      <div class="face front">
+        <div class="tag">DI MM</div>
+        <div class="answer">Documented Interest Medical Model</div>
+        <div class="intent">Ensures actions/changes are based on documented needs, not assumptions.</div>
+      </div>
+      <div class="face back">
+        <div class="answer">
+          Used in regulated/GxP environments for compliance and traceability.<br>
+          All support actions linked to documented requests.
+        </div>
+        <div class="validate">Critical for audit-readiness.</div>
+      </div>
+    </div>
+  </div>
+  <div class="card" onclick="this.classList.toggle('flipped')">
+    <div class="inner">
+      <div class="face front">
+        <div class="tag">QBR</div>
+        <div class="answer">Quarterly Business Review</div>
+        <div class="intent">Formal review with vendors on performance, SLAs, KPIs, and CAPAs.</div>
+      </div>
+      <div class="face back">
+        <div class="answer">
+          Drives accountability, contract compliance, and continuous improvement.<br>
+          Includes metrics, open issues, and action plans.
+        </div>
+        <div class="validate">Essential for vendor management.</div>
+      </div>
+    </div>
+  </div>
+  <div class="card" onclick="this.classList.toggle('flipped')">
+    <div class="inner">
+      <div class="face front">
+        <div class="tag">SLA / OLA</div>
+        <div class="answer">Service/Operational Level Agreement</div>
+        <div class="intent">Defines performance targets (uptime, response time) for services and teams.</div>
+      </div>
+      <div class="face back">
+        <div class="answer">
+          SLA: Between provider and customer.<br>
+          OLA: Between internal teams to support SLAs.
+        </div>
+        <div class="validate">Foundation for support contracts.</div>
+      </div>
+    </div>
+  </div>
+  <div class="card" onclick="this.classList.toggle('flipped')">
+    <div class="inner">
+      <div class="face front">
+        <div class="tag">CSAT</div>
+        <div class="answer">Customer Satisfaction</div>
+        <div class="intent">Measures user satisfaction with support/service.</div>
+      </div>
+      <div class="face back">
+        <div class="answer">
+          Collected via surveys after incidents or service requests.<br>
+          Used to drive improvements.
+        </div>
+        <div class="validate">Key KPI for support teams.</div>
+      </div>
+    </div>
+  </div>
+  <div class="card" onclick="this.classList.toggle('flipped')">
+    <div class="inner">
+      <div class="face front">
+        <div class="tag">CAPA</div>
+        <div class="answer">Corrective and Preventive Action</div>
+        <div class="intent">Actions to fix and prevent recurrence of issues.</div>
+      </div>
+      <div class="face back">
+        <div class="answer">
+          Tracked after incidents or QBRs.<br>
+          Ensures issues are resolved and do not repeat.
+        </div>
+        <div class="validate">Required for compliance and improvement.</div>
+      </div>
+    </div>
+  </div>
+  <div class="card" onclick="this.classList.toggle('flipped')">
+    <div class="inner">
+      <div class="face front">
+        <div class="tag">CMDB / CI</div>
+        <div class="answer">Configuration Management Database / Item</div>
+        <div class="intent">Tracks IT assets and their relationships for support and change control.</div>
+      </div>
+      <div class="face back">
+        <div class="answer">
+          CMDB: Repository of all CIs.<br>
+          CI: Any tracked component (hardware, software, docs).
+        </div>
+        <div class="validate">Critical for incident and change management.</div>
+      </div>
+    </div>
+  </div>
+  <div class="card" onclick="this.classList.toggle('flipped')">
+    <div class="inner">
+      <div class="face front">
+        <div class="tag">ITSM</div>
+        <div class="answer">IT Service Management</div>
+        <div class="intent">Framework for managing IT services (incident, problem, change, etc.).</div>
+      </div>
+      <div class="face back">
+        <div class="answer">
+          Ensures structured, repeatable support and operations.<br>
+          Includes processes, tools, and governance.
+        </div>
+        <div class="validate">Industry standard for IT support.</div>
+      </div>
+    </div>
+  </div>
+  <div class="card" onclick="this.classList.toggle('flipped')">
+    <div class="inner">
+      <div class="face front">
+        <div class="tag">PIR</div>
+        <div class="answer">Post-Incident Review</div>
+        <div class="intent">Structured review after an incident to analyze root cause and define fixes.</div>
+      </div>
+      <div class="face back">
+        <div class="answer">
+          Ensures learnings are captured and actions are tracked.<br>
+          Prevents repeat issues.
+        </div>
+        <div class="validate">Key for continuous improvement.</div>
+      </div>
+    </div>
+  </div>
+  <div class="card" onclick="this.classList.toggle('flipped')">
+    <div class="inner">
+      <div class="face front">
+        <div class="tag">GxP</div>
+        <div class="answer">Good Practice (Pharma/Regulated)</div>
+        <div class="intent">Regulatory standards for systems impacting product quality or patient safety.</div>
+      </div>
+      <div class="face back">
+        <div class="answer">
+          Includes GMP, GCP, GLP, etc.<br>
+          Requires validation, traceability, and compliance.
+        </div>
+        <div class="validate">Critical for pharma/regulated IT.</div>
+      </div>
+    </div>
+  </div>
+  <div class="card" onclick="this.classList.toggle('flipped')">
+    <div class="inner">
+      <div class="face front">
+        <div class="tag">ELS</div>
+        <div class="answer">Early Life Support</div>
+        <div class="intent">Extra support period after go-live to stabilize new/changed services.</div>
+      </div>
+      <div class="face back">
+        <div class="answer">
+          Ensures smooth transition to BAU (Business as Usual).<br>
+          Monitors incidents and user feedback closely.
+        </div>
+        <div class="validate">Best practice for service transition.</div>
+      </div>
+    </div>
+  </div>
+  <div class="card" onclick="this.classList.toggle('flipped')">
+    <div class="inner">
+      <div class="face front">
+        <div class="tag">KPI</div>
+        <div class="answer">Key Performance Indicator</div>
+        <div class="intent">Quantitative metric to measure performance (e.g., MTTR, SLA, CSAT).</div>
+      </div>
+      <div class="face back">
+        <div class="answer">
+          Used to track, report, and improve service and support outcomes.
+        </div>
+        <div class="validate">Central to dashboards and QBRs.</div>
+      </div>
+    </div>
+  </div>
+  <div class="card" onclick="this.classList.toggle('flipped')">
+    <div class="inner">
+      <div class="face front">
+        <div class="tag">CAB / BRB</div>
+        <div class="answer">Change Advisory Board / Business Review Board</div>
+        <div class="intent">Governance bodies for approving changes/releases and reviewing business impact.</div>
+      </div>
+      <div class="face back">
+        <div class="answer">
+          CAB: Approves technical changes.<br>
+          BRB: Reviews business impact and readiness.
+        </div>
+        <div class="validate">Ensures safe, controlled change management.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ================= TOUGH PANEL SIMULATION – ROUND 1 ================= -->
+<h2>🔥 Tough Panel Simulation – Round 1</h2>
+
+<div class="grid">
+
+  <div class="card" onclick="this.classList.toggle('flipped')">
+    <div class="inner">
+
+      <!-- FRONT -->
+      <div class="face front">
+        <div class="tag">HIRING MANAGER</div>
+        <div class="answer">
+          You come from a delivery and RTE background. This role is heavily support- and
+          ITSM-focused. Why should we believe you can shift from delivery success to
+          day-to-day service ownership without defaulting to delivery priorities?
+        </div>
+        <div class="intent">
+          What they want to know: Will you truly prioritize stability and support,
+          even when delivery timelines are under pressure?
+        </div>
+      </div>
+
+      <!-- BACK -->
+      <div class="face back">
+        <div class="answer">
+          I understand that concern. While my background is rooted in delivery, my transition
+          into leadership roles exposed me deeply to production support and stability
+          responsibilities alongside execution.<br><br>
+
+          What that experience taught me is that delivery and service ownership are not
+          competing priorities. Delivery decisions that ignore defect and incident learnings
+          eventually slow teams down and increase risk.<br><br>
+
+          In my current role, even when delivery is the primary accountability, I actively use
+          defect trends and incident insights to influence planning, risk discussions, and
+          release decisions. This role allows me to apply that same mindset more formally, where
+          service reliability and support maturity are the primary outcomes.
+        </div>
+
+        <div class="intent">
+          Intent reinforced: Demonstrate judgment, ability to balance pressure, and
+          service-first thinking over delivery optics.
+        </div>
+
+        <div class="validate">
+          Validates: ownership mindset, decision maturity, readiness for ITSM-heavy role
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+<!-- ================= TOUGH PANEL SIMULATION – ROUND 2 (ITSM / QA) ================= -->
+<h2>🔥 Tough Panel Simulation – Round 2 (ITSM / QA)</h2>
+
+<div class="grid">
+
+  <div class="card" onclick="this.classList.toggle('flipped')">
+    <div class="inner">
+
+      <!-- FRONT -->
+      <div class="face front">
+        <div class="tag">ITSM / QUALITY</div>
+        <div class="answer">
+          You’ve mentioned working closely with ITSM teams, but this role requires strong
+          hands-on ITSM process ownership in a regulated environment. Can you clarify what
+          parts of incident, problem, and change management you have personally driven, and
+          where you would need to ramp up?
+        </div>
+        <div class="intent">
+          What they want to know: Are you disciplined, audit-aware, and honest about your ITSM depth?
+        </div>
+      </div>
+
+      <!-- BACK -->
+      <div class="face back">
+        <div class="answer">
+          ITSM teams owned the tools and formal processes, but I’ve personally driven execution
+          within incident, problem, and change workflows in regulated environments.<br><br>
+
+          On incidents, I’ve led coordination during high-impact production issues—initial
+          triage, step-by-step isolation, war-room setup, enabling access to logs and traces,
+          and aligning engineering and QA on containment or workaround decisions.<br><br>
+
+          For problem management, I’ve driven post-incident RCA discussions, ensuring root
+          causes were clearly identified and translated into durable fixes rather than
+          temporary patches.<br><br>
+
+          On change management, I’ve supported and driven change readiness through CAB or
+          change review forums, ensuring rollback plans, risk assessments, and validation
+          considerations were in place before production deployment.<br><br>
+
+          I would ramp up further on hands-on ServiceNow workflows and pharma-specific
+          validation touchpoints, applying the same discipline I already use around stability,
+          traceability, and audit readiness.
+        </div>
+
+        <div class="intent">
+          Intent reinforced: Demonstrate process discipline, regulatory awareness, and honest
+          ownership without overclaiming.
+        </div>
+
+        <div class="validate">
+          Validates: ITSM credibility, QA trust, readiness for regulated support ownership
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+<!-- ================= TOUGH PANEL SIMULATION – ROUND 3 (VENDOR & COST) ================= -->
+<h2>🔥 Tough Panel Simulation – Round 3 (Vendor & Cost Pressure)</h2>
+
+<div class="grid">
+
+  <div class="card" onclick="this.classList.toggle('flipped')">
+    <div class="inner">
+
+      <div class="face front">
+        <div class="tag">VENDOR / COST</div>
+        <div class="answer">
+          This role manages external vendors while also being accountable for cost efficiency
+          and service reliability. How do you handle situations where vendor performance, cost,
+          and service quality are in tension?
+        </div>
+        <div class="intent">
+          What they want to know: Can you balance accountability, cost discipline, and service
+          stability without damaging partnerships?
+        </div>
+      </div>
+
+      <div class="face back">
+        <div class="answer">
+          I focus vendor conversations on outcomes rather than contracts—using data like
+          incident trends, repeat issues, and business impact to anchor discussions.<br><br>
+
+          When performance issues arise, I drive structured escalation with clear corrective
+          actions, focusing on root causes rather than short-term fixes.<br><br>
+
+          From a cost perspective, I’ve found that reducing repeat incidents, improving runbooks,
+          and clarifying ownership often delivers more sustainable savings than rate reductions
+          alone.
+        </div>
+
+        <div class="intent">
+          Intent reinforced: Outcome-driven vendor governance and cost-conscious stability.
+        </div>
+
+        <div class="validate">
+          Validates: vendor governance maturity, financial awareness, partnership mindset
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+<!-- ================= TOUGH PANEL SIMULATION – ROUND 4 (FIRST 90 DAYS) ================= -->
+<h2>🔥 Tough Panel Simulation – Round 4 (First 90 Days Ownership)</h2>
+
+<div class="grid">
+
+  <div class="card" onclick="this.classList.toggle('flipped')">
+    <div class="inner">
+
+      <div class="face front">
+        <div class="tag">FIRST 90 DAYS</div>
+        <div class="answer">
+          If selected, what would you focus on in your first 90 days in this role?
+        </div>
+        <div class="intent">
+          What they want to know: Will you listen first, protect controls, and deliver
+          visible stability improvements?
+        </div>
+      </div>
+
+      <div class="face back">
+        <div class="answer">
+          My first 90 days would focus on understanding before changing—learning incident
+          patterns, support processes, vendor dependencies, and product risks.<br><br>
+
+          I’d work closely with ITSM, QA, engineering, and vendors to identify friction points
+          and repeat issues, then prioritize a small number of high-impact stability
+          improvements while maintaining audit readiness.
+        </div>
+
+        <div class="intent">
+          Intent reinforced: Measured transition, trust-building, and risk-aware execution.
+        </div>
+
+        <div class="validate">
+          Validates: leadership judgment, onboarding maturity, change discipline
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+<!-- ================= RED FLAGS + PHARMA STAR ================= -->
+<h2>🚫 Red Flags & Pharma-Specific STAR</h2>
+
+<div class="grid">
+
+  <!-- WHAT NOT TO SAY -->
+  <div class="card" onclick="this.classList.toggle('flipped')">
+    <div class="inner">
+
+      <!-- FRONT -->
+      <div class="face front">
+        <div class="tag">RED FLAGS</div>
+        <div class="answer">
+          What NOT to say when discussing support backlog & priorities
+        </div>
+        <div class="intent">
+          What they want to know: Do you avoid reactive, blame-driven thinking?
+        </div>
+      </div>
+
+      <!-- BACK -->
+      <div class="face back">
+        <div class="answer">
+          ❌ “We try our best to accommodate all business priorities.”<br><br>
+          ❌ “Everything coming from the business is high priority.”<br><br>
+          ❌ “Support teams just have to multitask better.”<br><br>
+          ❌ “Incidents are unavoidable in complex systems.”<br><br>
+          ❌ “We didn’t have time to fix the backlog because incidents kept coming.”<br><br>
+
+          These responses signal reactive thinking, lack of ownership, and weak service
+          governance—especially risky in regulated environments.
+        </div>
+
+        <div class="validate">
+          Avoids: defensiveness, low maturity, audit-risk mindset
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- PHARMA-SPECIFIC STAR -->
+  <div class="card" onclick="this.classList.toggle('flipped')">
+    <div class="inner">
+
+      <!-- FRONT -->
+      <div class="face front">
+        <div class="tag">PHARMA STAR</div>
+        <div class="answer">
+          Support backlog vs business priority in a regulated pharma environment
+        </div>
+        <div class="intent">
+          What they want to know: Can you balance stability, compliance, and business pressure?
+        </div>
+      </div>
+
+      <!-- BACK -->
+      <div class="face back">
+        <div class="answer scrollable">
+          <b>Situation:</b> In a regulated pharma IT environment, the support team was heavily
+          incident-driven, with frequent urgent requests from business stakeholders. This
+          limited the team’s ability to address problem backlog items linked to repeat incidents
+          and operational risk.<br><br>
+
+          <b>Task:</b> My responsibility was to improve service stability and audit readiness
+          while continuing to support critical business needs, without bypassing validation or
+          ITSM controls.<br><br>
+
+          <b>Action:</b> I ensured all work was clearly categorized and aligned to ITSM processes.
+          I worked with ITSM and QA partners to identify backlog items with regulatory or patient
+          impact and protected capacity to address those first. Incident trends and repeat
+          failures were used to influence prioritization discussions with product and business
+          stakeholders, framing decisions in terms of compliance risk and service continuity
+          rather than urgency alone.<br><br>
+
+          <b>Result:</b> Over time, repeat incidents reduced, backlog items with compliance impact
+          were addressed more consistently, and prioritization discussions became more structured
+          and audit-safe. The service moved toward a more stable and predictable operating model.
+        </div>
+
+        <div class="validate">
+          Validates: GxP awareness, QA partnership, regulated service ownership maturity
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+
+<footer>
+Static • Offline • Senior-level interview prep
+</footer>
+
+</body>
+</html>
