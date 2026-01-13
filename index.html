@@ -184,26 +184,7 @@ footer {
 
 </style>
 
-<script>
-  const chips = document.querySelectorAll(".chip");
-  const cards = document.querySelectorAll(".card");
 
-  chips.forEach(chip => {
-    chip.addEventListener("click", () => {
-      const filter = chip.dataset.filter.toLowerCase();
-
-      cards.forEach(card => {
-        const text = card.innerText.toLowerCase();
-
-        if (filter === "all" || text.includes(filter)) {
-          card.style.display = "block";
-        } else {
-          card.style.display = "none";
-        }
-      });
-    });
-  });
-</script>
 
 </head>
 
@@ -1851,6 +1832,27 @@ As the Associate Director – Product management - Outsourced Applications, you 
 <footer>
 Static • Offline • Senior-level interview prep
 </footer>
+
+<script>
+  const chips = document.querySelectorAll(".chip");
+  const cards = document.querySelectorAll(".card");
+
+  chips.forEach(chip => {
+    chip.addEventListener("click", () => {
+      const filter = chip.dataset.filter.toLowerCase();
+
+      cards.forEach(card => {
+        const text = card.innerText.toLowerCase();
+
+        if (filter === "all" || text.includes(filter)) {
+          card.style.display = "block";
+        } else {
+          card.style.display = "none";
+        }
+      });
+    });
+  });
+</script>
 
 </body>
 </html>
