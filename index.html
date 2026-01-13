@@ -4,6 +4,19 @@
 <head>
 <meta charset="UTF-8">
 <title>GSK IJP – Interview Flip Cards (Final)</title>
+<div id="filters" style="margin:16px 0; display:flex; flex-wrap:wrap; gap:10px;">
+  <button class="chip" data-filter="itil">ITIL</button>
+  <button class="chip" data-filter="itsm">ITSM</button>
+  <button class="chip" data-filter="servicenow">ServiceNow</button>
+  <button class="chip" data-filter="gxp">GxP</button>
+  <button class="chip" data-filter="21 cfr">21 CFR Part 11</button>
+  <button class="chip" data-filter="incident">Incidents</button>
+  <button class="chip" data-filter="vendor">Vendor</button>
+  <button class="chip" data-filter="why now">Why Now</button>
+  <button class="chip" data-filter="differentiation">Differentiation</button>
+  <button class="chip" data-filter="all">Show All</button>
+</div>
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
@@ -154,7 +167,43 @@ footer {
   font-size: 12px;
   color: var(--text-muted);
 }
+
+.chip {
+  padding: 8px 14px;
+  border-radius: 20px;
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.2);
+  color: #e5e7eb;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.chip:hover {
+  background: rgba(56,189,248,0.25);
+}
+
 </style>
+
+<script>
+  const chips = document.querySelectorAll(".chip");
+  const cards = document.querySelectorAll(".card");
+
+  chips.forEach(chip => {
+    chip.addEventListener("click", () => {
+      const filter = chip.dataset.filter.toLowerCase();
+
+      cards.forEach(card => {
+        const text = card.innerText.toLowerCase();
+
+        if (filter === "all" || text.includes(filter)) {
+          card.style.display = "block";
+        } else {
+          card.style.display = "none";
+        }
+      });
+    });
+  });
+</script>
 
 </head>
 
